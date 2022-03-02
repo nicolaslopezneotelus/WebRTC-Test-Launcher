@@ -1,0 +1,121 @@
+const argv = require('yargs')
+                        .option('dn', {
+                            alias: 'displayName',
+                            demandOption: true,                            
+                            describe: 'Local username',
+                            type: 'string'
+                        })                        
+                        .option('pri', {
+                            alias: 'privateIdentity',
+                            demandOption: true,                            
+                            describe: 'Username from our PJSIP auth',
+                            type: 'string'
+                        })
+                        .option('pbi', {
+                            alias: 'publicIdentity',
+                            demandOption: true,                            
+                            describe: 'Public IP for generate publicIdentity',
+                            type: 'string'
+                        })
+                        .option('r', {
+                            alias: 'realm',
+                            demandOption: true,                            
+                            describe: 'Realm identity',
+                            type: 'string'
+                        })
+                        .option('p', {
+                            alias: 'password',
+                            demandOption: true,                            
+                            describe: 'Device Password',
+                            type: 'string'
+                        })
+                        .option('wsp', {
+                            alias: 'websocket_proxy_url',
+                            demandOption: true,                            
+                            describe: 'Web Socket URL with format wss://(ip address of asterisk):port',
+                            type: 'string'
+                        })
+                        .option('op', {
+                            alias: 'outbound_proxy_url',
+                            demandOption: false,
+                            default: '',
+                            describe: 'Proxy Socket URL for redirect outbound packages.',
+                            type: 'string'
+                        })
+                        .option('ice', {
+                            alias: 'ice_servers',
+                            demandOption: false,
+                            default: '[]',
+                            describe: 'Ice_servers array [,]',
+                            type: 'string'
+                        })
+                        .option('erb', {
+                            alias: 'enable_rtcweb_breaker',
+                            demandOption: false,
+                            default: false,
+                            describe: 'Enable RTCWebBreacker for webrtc2sip server',
+                            type: 'boolean'
+                        })
+                        .option('eei', {
+                            alias: 'enable_early_ims',
+                            demandOption: false,
+                            default: false,
+                            describe: 'Enable 3GGP Early IMS as per TR 33.978.',
+                            type: 'boolean'
+                        })
+                        .option('msc', {
+                            alias: 'enable_media_stream_cache',
+                            demandOption: false,
+                            default: false,
+                            describe: 'For non https connections.',
+                            type: 'boolean'
+                        })
+                        .option('b', {
+                            alias: 'bandwidth',
+                            demandOption: false,
+                            default: '',
+                            describe: 'Maximum audio and video bandwidth to use.',
+                            type: 'string'
+                        })
+                        .option('vs', {
+                            alias: 'video_size',
+                            demandOption: false,
+                            default: '',
+                            describe: 'Maximum and minimum video size to be used.',
+                            type: 'string'
+                        })
+                        .option('t', {
+                            alias: 'testmode',
+                            demandOption: false,
+                            default: true,
+                            describe: 'Must be true for running test.',
+                            type: 'string'
+                        })
+                        .option('nb', {
+                            alias: 'nbrowsers',
+                            demandOption: true,
+                            describe: 'Number of browsers that should be opened.',
+                            type: 'number'
+                        })
+                        .option('u', {
+                            alias: 'url',
+                            demandOption: true,
+                            describe: 'WebPhone URL',
+                            type: 'string'
+                        })
+                        .option('br', {
+                            alias: 'browser',
+                            demandOption: false,
+                            default: 'firefox',
+                            describe: 'Browser App',
+                            type: 'string'
+                        })
+                        .check( (argv, options) =>{
+                            if (isNaN(argv.nb)) {
+                                throw 'The nbrowsers parameters, must be a number.';                                                            
+                            }                            
+                            return true;
+                        } )
+                        .argv;
+
+module.exports = argv;
