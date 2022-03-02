@@ -1,4 +1,8 @@
 # WebRTC-Test-Launcher
+
+<p>Calltest.htm load the configuration parameters from URL, in contrast to call.htm that load the configuration parameters from local storage. 
+Execute node app to automatic generate URL and open browsers.</p>
+
 <p>node app --help to obtain more information.</p>
 
 --dn dispalyName <br>
